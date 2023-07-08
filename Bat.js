@@ -1,32 +1,30 @@
+const speed = 0.02
+
 export default class Bat{
     constructor(batElem){
         this.batElem = batElem;
-        // document.addEventListener("mousemove",e =>{
-        //     this.pos = (e.y/window.innerHeight)*100
-        // })
-        this.setup()
+        this.reset()
     }
 
-    setup()
-    {
-        document.addEventListener("keydown", e => {
-            if(e.key === "ArrowDown")
-            this.pos -= 0.5
-        })
+    reset(){
+        this.pos = 50
     }
 
+    rect(){
+        return this.batElem.getBoundingClientRect()
+    }
+    
     get pos(){
-        return parseFloat(getComuptedStyle(this.batElem).getPropertyValue("--position"))
+        return parseFloat(getComputedStyle(this.batElem).getPropertyValue("--position"))
     }
 
     set pos(value)
     {
         this.batElem.style.setProperty("--position", value)
     }
-    update()
+
+    update(delta, ballHeight)
     {
-        
+        this.pos += speed * delta * (ballHeight-this.pos)
     }
-
-
 }

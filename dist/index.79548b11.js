@@ -574,47 +574,67 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 }
 
 },{}],"lz8gZ":[function(require,module,exports) {
-// console.log(8+6)
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 var _bat = require("./Bat");
 var _batDefault = parcelHelpers.interopDefault(_bat);
+var _ball = require("./Ball");
+var _ballDefault = parcelHelpers.interopDefault(_ball);
 let lastTime;
-let bat = new (0, _batDefault.default)(document.getElementById("paddle"));
+let ball = new (0, _ballDefault.default)(document.getElementById("ball"));
+let batLeft = new (0, _batDefault.default)(document.getElementById("paddle-left"));
+let batRight = new (0, _batDefault.default)(document.getElementById("paddle-right"));
+let playerScore = document.getElementById("player-score");
+let computerScore = document.getElementById("computer-score");
+document.addEventListener("mousemove", (e)=>{
+    batLeft.pos = e.y / innerHeight * 100;
+});
 function update(time) {
-    // console.log("helllo world");
-    if (lastTime != null) // console.log(time - lastTime)
-    bat.update();
+    if (lastTime != null) {
+        const paddleLeftRect = batLeft.rect();
+        const paddleRightRect = batRight.rect();
+        const delta = time - lastTime;
+        ball.update(delta, paddleLeftRect, paddleRightRect);
+        batRight.update(delta, ball.y);
+    }
+    if (isLose()) {
+        const rect = ball.rect();
+        if (rect.left <= 0) computerScore.textContent = parseInt(computerScore.textContent) + 1;
+        else playerScore.textContent = parseInt(playerScore.textContent) + 1;
+        ball.setup();
+    }
     lastTime = time;
     window.requestAnimationFrame(update);
 }
-document.addEventListener("keydown", (e)=>{
-    if (e.key === "ArrowDown") bat.pos -= 0.5;
-});
+function isLose() {
+    const rect = ball.rect();
+    return rect.left <= 0 || rect.right >= window.innerWidth;
+}
 window.requestAnimationFrame(update);
 
-},{"./Bat":"46TX0","@parcel/transformer-js/src/esmodule-helpers.js":"3GpeP"}],"46TX0":[function(require,module,exports) {
+},{"./Bat":"46TX0","./Ball":"3eTk8","@parcel/transformer-js/src/esmodule-helpers.js":"3GpeP"}],"46TX0":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+const speed = 0.02;
 class Bat {
     constructor(batElem){
         this.batElem = batElem;
-        // document.addEventListener("mousemove",e =>{
-        //     this.pos = (e.y/window.innerHeight)*100
-        // })
-        this.setup();
+        this.reset();
     }
-    setup() {
-        document.addEventListener("keydown", (e)=>{
-            if (e.key === "ArrowDown") this.pos -= 0.5;
-        });
+    reset() {
+        this.pos = 50;
+    }
+    rect() {
+        return this.batElem.getBoundingClientRect();
     }
     get pos() {
-        return parseFloat(getComuptedStyle(this.batElem).getPropertyValue("--position"));
+        return parseFloat(getComputedStyle(this.batElem).getPropertyValue("--position"));
     }
     set pos(value) {
         this.batElem.style.setProperty("--position", value);
     }
-    update() {}
+    update(delta, ballHeight) {
+        this.pos += speed * delta * (ballHeight - this.pos);
+    }
 }
 exports.default = Bat;
 
@@ -648,6 +668,60 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}]},["j7CLg","lz8gZ"], "lz8gZ", "parcelRequire94c2")
+},{}],"3eTk8":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+const vel = 0.025;
+const inc = 0.0001;
+class Ball {
+    constructor(ballElem){
+        this.ballElem = ballElem;
+        this.setup();
+    }
+    setup() {
+        this.x = 50;
+        this.y = 50;
+        this.direction = {
+            x: 0,
+            y: 0
+        };
+        while(Math.abs(this.direction.x) <= 0.3 || Math.abs(this.direction.x) >= 0.8){
+            this.theta = Math.random() * Math.PI * 2;
+            this.direction = {
+                x: Math.cos(this.theta),
+                y: Math.sin(this.theta)
+            };
+        }
+        console.log(this.direction);
+        this.velocity = vel;
+    }
+    get x() {
+        return parseFloat(getComputedStyle(this.ballElem).getPropertyValue("--x"));
+    }
+    set x(value) {
+        this.ballElem.style.setProperty("--x", value);
+    }
+    get y() {
+        return parseFloat(getComputedStyle(this.ballElem).getPropertyValue("--y"));
+    }
+    set y(value) {
+        this.ballElem.style.setProperty("--y", value);
+    }
+    rect() {
+        return this.ballElem.getBoundingClientRect();
+    }
+    update(delta, paddleLeftRect, paddleRightRect) {
+        this.x += this.direction.x * this.velocity * delta;
+        this.y += this.direction.y * this.velocity * delta;
+        this.velocity += inc;
+        let rect = this.rect();
+        if (rect.y <= 0 || rect.y >= window.innerHeight) this.direction.y *= -1;
+        if (paddleLeftRect.right >= rect.left && paddleLeftRect.top <= rect.top && paddleLeftRect.bottom >= rect.bottom) this.direction.x *= -1;
+        if (paddleRightRect.left <= rect.right && paddleRightRect.top <= rect.top && paddleRightRect.bottom >= rect.bottom) this.direction.x *= -1;
+    }
+}
+exports.default = Ball;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"3GpeP"}]},["j7CLg","lz8gZ"], "lz8gZ", "parcelRequire94c2")
 
 //# sourceMappingURL=index.79548b11.js.map

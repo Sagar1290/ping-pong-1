@@ -1,9 +1,15 @@
+*, *::after, *::before{
+    box-sizing: border-box;
+}
+
+
 body{
     background-color: red;
     margin: 0;
+    overflow: hidden;
 }
 
-#paddle{
+#paddle-left{
     --position: 50;
     background-color: white;
     margin: 0;
@@ -13,4 +19,51 @@ body{
     top: calc(var(--position) * 1vh);
     transform: translateY(-50%);
     left: 0;
+}
+
+#ball{
+    --x: 50;
+    --y: 50;
+
+    background-color: cyan;
+    height: 5vh;
+    width: 5vh;
+    position: absolute;
+    top: calc(var(--y) * 1vh);
+    left: calc(var(--x) * 1vw);
+    transform: translateX(-50%);
+    transform: translateY(-50%);
+    border-radius: 50%;
+    border: none;
+}
+
+#paddle-right{
+    --position: 50;
+    height: 10vh;
+    width: 5vh;
+    margin: 0;
+    position: absolute;
+    top: calc(var(--position) * 1vh);
+    transform: translateY(-50%);
+    background-color: black;
+    right: 0;
+}
+
+.score{ 
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 7vh;
+    color: turquoise;
+}
+
+.score > *{
+    flex-grow: 1;
+    flex-basis: 0;
+    padding: 0 2vh;
+    margin: 1vh 0;
+}
+.score > :first-child{
+    text-align: right;
+    border-right: .5vh solid white;
 }
