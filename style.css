@@ -4,7 +4,7 @@
 
 
 body{
-    background-color: red;
+    background-color: rgb(68, 39, 39);
     margin: 0;
     overflow: hidden;
 }
@@ -12,9 +12,9 @@ body{
 #paddle-left{
     --position: 50;
     background-color: white;
-    margin: 0;
-    height: 10vh;
-    width: 5vh;
+    margin-left: 2px;
+    height: 15vh;
+    width: 2vh;
     position: absolute;
     top: calc(var(--position) * 1vh);
     transform: translateY(-50%);
@@ -39,13 +39,13 @@ body{
 
 #paddle-right{
     --position: 50;
-    height: 10vh;
-    width: 5vh;
-    margin: 0;
+    height: 15vh;
+    width: 2vh;
+    margin-right: 2px;
     position: absolute;
     top: calc(var(--position) * 1vh);
     transform: translateY(-50%);
-    background-color: black;
+    background-color: white;
     right: 0;
 }
 

@@ -54,9 +54,9 @@ export default class Ball{
         if(rect.y <=0 || rect.y >= window.innerHeight)
         this.direction.y *= -1;
         
-        if(paddleLeftRect.right >= rect.left  && paddleLeftRect.top <= rect.top && paddleLeftRect.bottom >= rect.bottom)
+        if(paddleLeftRect.right >= rect.left  && paddleLeftRect.top <= rect.bottom && paddleLeftRect.bottom >= rect.top)
         this.direction.x *= -1
-        if(paddleRightRect.left <= rect.right && paddleRightRect.top <= rect.top && paddleRightRect.bottom >= rect.bottom)
+        if(paddleRightRect.left <= rect.right && paddleRightRect.top <= rect.bottom && paddleRightRect.bottom >= rect.top)
         this.direction.x *= -1   
     }
 }

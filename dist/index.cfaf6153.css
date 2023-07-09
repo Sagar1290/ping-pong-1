@@ -3,7 +3,7 @@
 }
 
 body {
-  background-color: red;
+  background-color: #442727;
   margin: 0;
   overflow: hidden;
 }
@@ -12,9 +12,9 @@ body {
   --position: 50;
   top: calc(var(--position) * 1vh);
   background-color: #fff;
-  width: 5vh;
-  height: 10vh;
-  margin: 0;
+  width: 2vh;
+  height: 15vh;
+  margin-left: 2px;
   position: absolute;
   left: 0;
   transform: translateY(-50%);
@@ -37,10 +37,10 @@ body {
 #paddle-right {
   --position: 50;
   top: calc(var(--position) * 1vh);
-  background-color: #000;
-  width: 5vh;
-  height: 10vh;
-  margin: 0;
+  background-color: #fff;
+  width: 2vh;
+  height: 15vh;
+  margin-right: 2px;
   position: absolute;
   right: 0;
   transform: translateY(-50%);
