@@ -19,9 +19,7 @@ the difficulty is increased by increasing the velocity of ball with time. As win
 ## How to Play
 Launch the game by clicking this url ()
 
-this is player vs player game:
-  * player one uses the left paddle, controlled by the W and S keys
-  * player two uses the right paddle, controlled by the Up and Down arrow keys.
+this is player vs Computer game where the player paddle can be controlled by mouse.
 
 Move your paddle up and down to hit the ball and prevent it from crossing the screen boundary.
 
