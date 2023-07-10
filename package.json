@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "start": "parcel index.html",
-    "build": "parcel build index.html"
+    "build": "parcel build --dist-dir public index.html"
   },
   "devDependencies":{
     "parcel":"^2.9.3"
