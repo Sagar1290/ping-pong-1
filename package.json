@@ -9,6 +9,9 @@
   "devDependencies":{
     "parcel":"^2.9.3"
     },
+  "parcel": {
+    "publicUrl": ""
+  },
   "keywords": [],
   "author": "",
   "license": "ISC"
