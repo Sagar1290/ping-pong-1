@@ -17,7 +17,7 @@ export default class Ball{
             this.theta = Math.random() *Math.PI * 2;
             this.direction = {x:Math.cos(this.theta), y: Math.sin(this.theta)}
         }
-        console.log(this.direction)
+        
         this.velocity = vel;
     }
 
