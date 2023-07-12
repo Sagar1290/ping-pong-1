@@ -1,6 +1,6 @@
-# ping-pong-2
+# ping-pong-1
 
-Welcome to the Ping Pong Game! 
+Welcome to the Ping Pong Game! (Single Player)
 
 This is a classic arcade-style game where you control a paddle and try to hit the ball back and forth with your opponent. The objective is to score as many points as possible by preventing the ball from passing your paddle while trying to make your opponent miss.
 
