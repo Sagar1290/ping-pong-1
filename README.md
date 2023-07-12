@@ -17,7 +17,7 @@ This is a classic arcade-style game where you control a paddle and try to hit th
 the difficulty is increased by increasing the velocity of ball with time. As winning against AI is tough to the computer paddle is restricted after some speed so just score more and beat the AI.
 
 ## How to Play
-Launch the game by clicking 
+Launch the game by clicking  https://sagar1290.github.io/ping-pong-1/
 
 this is player vs Computer game where the player paddle can be controlled by mouse.
 
